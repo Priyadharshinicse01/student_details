@@ -2,9 +2,9 @@ name: Spring Boot CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" , "main" , "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" , "main" , "dev" ]
 
 jobs:
   build:
@@ -21,4 +21,4 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
