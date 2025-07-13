@@ -24,7 +24,7 @@ public class Controller1 {
 
     @GetMapping("/home")
     public String home() {
-        return "index"; 
+        return "pages/index"; 
     }
     
     /*@PostMapping("/submit")
@@ -57,7 +57,7 @@ public class Controller1 {
     
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "pages/login";
     }
 
     @PostMapping("/submitlogin")
@@ -66,10 +66,10 @@ public class Controller1 {
         String validPassword = "admin@123";
 
         if (validUsername.equals(login.getUsername()) && validPassword.equals(login.getPassword())) {
-            return "add";
+            return "pages/add";
         } else {
             model.addAttribute("error", "Invalid username or password");
-            return "login"; 
+            return "pages/login"; 
         }
     }
     /*public String submitLogin(LoginModel login) {
@@ -79,7 +79,7 @@ public class Controller1 {
 
     @GetMapping("/add")
     public String addstudent() {
-        return "add";
+        return "pages/add";
     }
 
     /*@PostMapping("/submit")
@@ -91,7 +91,7 @@ public class Controller1 {
     @PostMapping("/submit")
     public String submit(@ModelAttribute PathModel student) {
         repo.save(student);
-        return "redirect:/view";
+        return "redirect:pages/view";
     }
     
     @GetMapping("/view")  
@@ -99,7 +99,7 @@ public class Controller1 {
     {
     	List<PathModel> students=repo.findAll();
     	request.setAttribute("students", students);
-    	return "view";
+    	return "pages/view";
     }
     
     @GetMapping("/edit")
@@ -107,26 +107,26 @@ public class Controller1 {
         PathModel student = repo.findById(id).orElse(null);
         if (student != null) {
             model.addAttribute("student", student);
-            return "edit";
+            return "pages/edit";
         } else {
-            return "redirect:/view";
+            return "redirect:pages/view";
         }
     }
 
     @PostMapping("/update")
     public String updateStudent(@ModelAttribute PathModel student) {
         repo.save(student);
-        return "redirect:/view";
+        return "redirect:pages/view";
     }
 
     @GetMapping("/delete")
     public String deleteStudent(@ModelAttribute("id") int id) {
         repo.deleteById(id);
-        return "redirect:/view";
+        return "redirect:pages/view";
     }
 
     @GetMapping("/logout")
     public String logout() {
-    	return "login";
+    	return "pages/login";
     }
 }
