@@ -24,7 +24,7 @@ public class Controller1 {
 
     @GetMapping("/home")
     public String home() {
-        return "pages/index"; 
+        return "index"; 
     }
     
     /*@PostMapping("/submit")
@@ -57,7 +57,7 @@ public class Controller1 {
     
     @GetMapping("/login")
     public String loginPage() {
-        return "pages/login";
+        return "login";
     }
 
     @PostMapping("/submitlogin")
@@ -66,10 +66,10 @@ public class Controller1 {
         String validPassword = "admin@123";
 
         if (validUsername.equals(login.getUsername()) && validPassword.equals(login.getPassword())) {
-            return "pages/add";
+            return "add";
         } else {
             model.addAttribute("error", "Invalid username or password");
-            return "pages/login"; 
+            return "login"; 
         }
     }
     /*public String submitLogin(LoginModel login) {
@@ -79,7 +79,7 @@ public class Controller1 {
 
     @GetMapping("/add")
     public String addstudent() {
-        return "pages/add";
+        return "add";
     }
 
     /*@PostMapping("/submit")
@@ -91,7 +91,7 @@ public class Controller1 {
     @PostMapping("/submit")
     public String submit(@ModelAttribute PathModel student) {
         repo.save(student);
-        return "redirect:pages/view";
+        return "redirect:view";
     }
     
     @GetMapping("/view")  
@@ -107,9 +107,9 @@ public class Controller1 {
         PathModel student = repo.findById(id).orElse(null);
         if (student != null) {
             model.addAttribute("student", student);
-            return "pages/edit";
+            return "edit";
         } else {
-            return "redirect:pages/view";
+            return "redirect:view";
         }
     }
 
